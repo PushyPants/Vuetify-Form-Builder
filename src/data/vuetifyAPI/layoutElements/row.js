@@ -1,6 +1,7 @@
 export default {
   displayName: "Row",
   vuetifyComponent: "v-row",
+  icon: "mdi-view-day",
   desc: "Horizontal container to hold columns",
   level: "basic",
   props: {

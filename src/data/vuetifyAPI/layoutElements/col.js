@@ -1,6 +1,7 @@
 export default {
   displayName: "Column",
   vuetifyComponent: "v-col",
+  icon: "mdi-view-array",
   desc: "Divides a row element into columns",
   level: "basic",
   props: {
