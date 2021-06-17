@@ -3,7 +3,7 @@
     no-gutters
     @mouseover="setHoverActive(element.id)"
     @mouseleave="setHoverActiveRow('')"
-    @click="setHoverActiveRow(element.id)"
+    @click="setActiveRowElement(element.id)"
   >
     <v-col
       class="canvas-row-col"
