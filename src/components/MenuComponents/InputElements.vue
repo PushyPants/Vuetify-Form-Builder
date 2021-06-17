@@ -24,8 +24,9 @@ export default {
     addElement(element) {
       const elm = { ...element };
       elm.id = v4();
-      console.log(elm);
-      this.$emit("add-element", elm);
+      elm.type = "input";
+
+      this.$emit("add-input-element", elm);
     },
   },
 };

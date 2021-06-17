@@ -4,58 +4,47 @@
     justify="end"
     class="form-builder-elements-controller"
     :class="{ 'full-opacity': active }"
-    @mouseover="setHoverActive(element.id)"
-    @mouseleave="setHoverInactive(element.id)"
-    @click="setActiveElement(element.id)"
+    @mouseover="setHoverActive()"
+    @mouseleave="setHoverActiveInput(element.id)"
+    @click="setActiveInputElement(element.id)"
   >
     <v-col class="form-element-drag-handle-col">
-      <v-icon class="mt-n8">mdi-drag-horizontal</v-icon>
+      <v-icon class="mt-n8 drag-handle">mdi-drag-horizontal</v-icon>
     </v-col>
     <v-col cols="auto" class="form-element-editor-buttons-col">
       <v-btn fab x-small class="mb-1"><v-icon>mdi-pencil</v-icon></v-btn>
-      <v-btn fab x-small><v-icon>mdi-delete</v-icon></v-btn>
+      <v-btn fab x-small @click="removeElement(element.id)"
+        ><v-icon>mdi-delete</v-icon></v-btn
+      >
     </v-col>
   </v-row>
 </template>
 
 <script>
+import { FormBuilderMixins } from "../../../mixins/FormBuilderMixins";
+
 export default {
+  mixins: [FormBuilderMixins],
   props: {
     element: {
       type: Object,
       default: () => {},
     },
-    hoverActiveElement: {
-      type: String,
-      default: "",
-    },
-    activeElement: {
-      type: String,
-      default: "",
-    },
   },
   computed: {
     active() {
-      const hover = this.element?.id === this.hoverActiveElement;
-      const active = this.element?.id === this.activeElement;
+      const hover = this.element?.id === this.hoverActiveInput;
+      const active = this.element?.id === this.activeInputElement;
 
       return hover || (!hover && active);
     },
   },
   methods: {
-    setHoverActive(id) {
+    setHoverActive() {
       if (!this.hoverActive) {
-        console.log(`sending emit`, id);
-        this.$emit("hover-active", id);
+        console.log(`hover in`);
+        this.setHoverActiveInput(this.element?.id);
       }
-    },
-    setHoverInactive(id) {
-      console.log(`sending emit`, id);
-      this.$emit("hover-inactive", id);
-    },
-    setActiveElement(id) {
-      console.log(`sending emit`, id);
-      this.$emit("active-element", id);
     },
   },
 };
@@ -83,6 +72,10 @@ export default {
   border-right: 0px;
   border-radius: 6px 0 0 6px;
   text-align: center;
+}
+
+.drag-handle {
+  cursor: move;
 }
 
 .form-element-editor-buttons-col {

@@ -1,29 +1,33 @@
 <template>
   <div class="layout-element-container">
-    <div
-      class="horizontal-layout-container element-border"
-      @click="addHorizontal()"
+    <v-btn
+      v-for="(element, idx) in layoutElements"
+      :key="idx"
+      class="mb-2"
+      x-large
+      @click="addElement(element)"
     >
-      <div class="horizontal-element-inner inner-element-border">
-        <!-- <v-icon large>mdi-plus-circle-outline</v-icon> -->
-        <h2>Horizontal Container</h2>
-      </div>
-    </div>
+      <v-icon class="mr-2">{{ element.icon }}</v-icon> {{ element.displayName }}
+    </v-btn>
   </div>
 </template>
 
 <script>
+import { v4 } from "uuid";
+import layoutElements from "../../data/vuetifyAPI/layoutElements";
+
 export default {
   data: () => ({
-    horizontalSchema: {
-      type: "HorizontalLayout",
-      elements: [],
-      options: {},
-    },
+    layoutElements,
   }),
   methods: {
-    addHorizontal() {
-      this.$emit("add-layout-obj", this.horizontalSchema);
+    addElement(element) {
+      const elm = { ...element };
+      elm.id = v4();
+      elm.elements = [];
+      elm.type = "layout";
+
+      this.$emit("add-layout-obj", elm);
     },
   },
 };
@@ -41,6 +45,9 @@ export default {
 }
 
 .layout-element-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
   min-height: 250px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 6px;

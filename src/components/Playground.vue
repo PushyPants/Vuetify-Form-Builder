@@ -35,7 +35,7 @@
                     <h3>Layout Elements</h3>
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <layout-elements @add-layout-obj="addLayoutObj" />
+                    <layout-elements @add-layout-obj="addRowElement" />
                   </v-expansion-panel-content>
                 </v-expansion-panel>
                 <v-expansion-panel>
@@ -43,7 +43,7 @@
                     <h3>Form Elements</h3>
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <form-elements @add-element="addFormElement" />
+                    <input-elements @add-input-element="addInputElement" />
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
@@ -55,7 +55,7 @@
             <v-card-title> Form Builder </v-card-title>
             <v-divider></v-divider>
             <v-card-text>
-              <form-builder-canvas :formElements="formElements" />
+              <form-builder-canvas />
             </v-card-text>
           </v-card>
         </v-col>
@@ -75,27 +75,28 @@
 <script>
 import Preview from "./PreviewComponents/Preview";
 import LayoutElements from "./MenuComponents/LayoutElements";
-import FormElements from "./MenuComponents/FormElements";
+import InputElements from "./MenuComponents/InputElements";
 import FormBuilderCanvas from "./FormBuilderComponents/FormBuilderCanvas";
+import { FormBuilderMixins } from "../mixins/FormBuilderMixins";
 
 export default {
+  mixins: [FormBuilderMixins],
   components: {
     Preview,
     LayoutElements,
-    FormElements,
+    InputElements,
     FormBuilderCanvas,
   },
   data: () => ({
     displayPreview: false,
     expansion: [0, 1],
-    formElements: [],
   }),
-  methods: {
-    addLayoutObj(dataObj) {
-      this.uiSchema.elements.push(dataObj);
+  watch: {
+    formElements() {
+      console.log(this.formElements);
     },
-    addFormElement(elmObj) {
-      this.formElements.push(elmObj);
+    elementToRemove(v) {
+      this.removeElement(v);
     },
   },
 };
