@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { FormBuilderMixins } from "../../../mixins/FormBuilderMixins";
+import { FormBuilderMixins } from "../../mixins/FormBuilderMixins";
 
 export default {
   mixins: [FormBuilderMixins],

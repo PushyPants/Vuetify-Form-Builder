@@ -15,8 +15,8 @@
 
 <script>
 import { FormBuilderMixins } from "../../mixins/FormBuilderMixins";
-import RowElement from "../FormBuilderComponents/LayoutElements/RowElement";
-import InputElement from "./InputElements/InputElement";
+import RowElement from "./RowElement";
+import InputElement from "./InputElement";
 
 export default {
   mixins: [FormBuilderMixins],
