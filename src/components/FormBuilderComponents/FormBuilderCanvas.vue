@@ -6,8 +6,11 @@
         v-for="(element, idx) in formElements"
         :key="idx"
       >
-        <row-element v-if="element.type === 'layout'" :element="element" />
-        <input-element v-else :element="element" />
+        <form-builder-row-element
+          v-if="element.type === 'layout'"
+          :element="element"
+        />
+        <form-builder-input-element v-else :element="element" />
       </div>
     </v-form>
   </v-row>
@@ -15,35 +18,14 @@
 
 <script>
 import { FormBuilderMixins } from "../../mixins/FormBuilderMixins";
-import RowElement from "./RowElement";
-import InputElement from "./InputElement";
+import FormBuilderRowElement from "./FormBuilderRowElement";
+import FormBuilderInputElement from "./FormBuilderInputElement";
 
 export default {
   mixins: [FormBuilderMixins],
   components: {
-    InputElement,
-    RowElement,
-  },
-  data: () => ({}),
-  methods: {
-    setHoverActive(type, id) {
-      const properCaseType = this.properCase(type);
-      this[`hoverActive${properCaseType}`] = id;
-      console.log(`setting hoverActive${properCaseType} to: `, id);
-    },
-    setHoverInactive(type) {
-      const properCaseType = this.properCase(type);
-      this[`hoverActive${properCaseType}`] = "";
-      console.log(`setting hoverActive${properCaseType} to: `, "");
-    },
-    setActiveElement(type, id) {
-      const properCaseType = this.properCase(type);
-      this[`active${properCaseType}Element`] = id;
-      console.log(`setting active${properCaseType}Element to: `, id);
-    },
-    properCase(word) {
-      return word.toLowerCase().charAt(0).toUpperCase() + word.slice(1);
-    },
+    FormBuilderInputElement,
+    FormBuilderRowElement,
   },
 };
 </script>
