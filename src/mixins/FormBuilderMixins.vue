@@ -3,6 +3,7 @@ import { v4 } from "uuid";
 import { mapGetters, mapActions } from "vuex";
 import layoutElements from "../data/vuetifyAPI/layoutElements";
 const lodash_get = require("lodash/get");
+const lodash_find = require("lodash/find");
 
 export const FormBuilderMixins = {
   data: () => ({
@@ -45,18 +46,18 @@ export const FormBuilderMixins = {
       "setElementToEdit",
       "setElementToRemove",
     ]),
-    addElement(element, type) {
+    addElement(element) {
       const elm = { ...element };
 
-      switch (type) {
+      switch (elm.type) {
         case "row":
           this.addRow(elm);
           break;
         case "column":
-          this.addColumnElement(elm);
+          this.addColumn(elm);
           break;
         default:
-          this.addInputElement(elm);
+          this.addInput(elm);
       }
     },
     addRow(element) {
@@ -64,12 +65,19 @@ export const FormBuilderMixins = {
       // add a column forformatting and logistical reasons
       const elementsArr = [...this.formElements];
       const col = { ...this.layoutElements.col };
-      col.id = v4();
-      col.type = "column";
-      col.children = [];
+      const activeLayout = this.activeLayoutElement;
+      const activeEl = lodash_find(elementsArr, ["id", activeLayout]);
       element.children = [col];
+      const activity = {
+        hoverCol: this.hoverActiveCol,
+        hoverRow: this.hoverActiveRow,
+        activeCol: this.activeColElement,
+        activeRow: this.activeRowElement,
+        activeLayout: this.activeLayoutElement,
+      };
+      debugger;
 
-      if (this.activeLayoutElement) {
+      if (activeEl && activeEl.type !== "row") {
         const parentPath = this.getParentPath(
           elementsArr,
           this.activeLayoutElement
@@ -79,12 +87,13 @@ export const FormBuilderMixins = {
         parentElement.push(element);
       } else {
         elementsArr.push(element);
-        this.setActiveRowElement(element.id);
-        this.setActiveColElement(col.id);
       }
 
       this.updateFormElements(elementsArr);
+      this.setActiveRowElement(element.id);
+      this.setActiveColElement(col.id);
     },
+    addColumn(element) {},
     findPathFromId(obj, id) {
       for (const key in obj) {
         if (obj[key] && typeof obj[key] === "object") {

@@ -5,6 +5,7 @@ export default {
   vuetifyComponent: "v-col",
   icon: "mdi-view-array",
   type: "column",
+  children: [],
   id: v4(),
   desc: "Divides a row element into columns",
   level: "basic",

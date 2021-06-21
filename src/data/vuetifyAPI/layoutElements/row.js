@@ -4,6 +4,7 @@ export default {
   displayName: "Row",
   vuetifyComponent: "v-row",
   type: "row",
+  children: [],
   id: v4(),
   icon: "mdi-view-day",
   desc: "Horizontal container to hold columns",

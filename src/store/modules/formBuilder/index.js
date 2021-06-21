@@ -20,8 +20,8 @@ const findAndRemoveInputElement = async (array, elementId) => {
   if (elmIdx >= 0) {
     array.splice(elmIdx, 1);
     return;
-  } else if (array.elements?.length) {
-    await this.findAndRemoveInputElement(array.elements, elementId);
+  } else if (array.children?.length) {
+    await this.findAndRemoveInputElement(array.children, elementId);
   }
 };
 

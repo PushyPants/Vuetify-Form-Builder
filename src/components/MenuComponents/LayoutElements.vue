@@ -6,7 +6,7 @@
       class="mb-2"
       x-large
       draggable="true"
-      @click="addElement(element, 'row')"
+      @click="addElement(element)"
     >
       <v-icon class="mr-2">{{ element.icon }}</v-icon> {{ element.displayName }}
     </v-btn>
