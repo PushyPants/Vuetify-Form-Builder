@@ -1,9 +1,13 @@
+import { v4 } from "uuid";
+
 export default {
   displayName: "Auto Complete",
   vuetifyComponent: "v-autocomplete",
+  type: "input",
+  id: v4(),
+  level: "advanced",
   desc:
     "The Autocomplete component offers simple and flexible type-ahead functionality. This is useful when searching large sets of data or even dynamically requesting information from an API.",
-  level: "advanced",
   props: {
     "allow-overflow": {
       propName: "allow-overflow",

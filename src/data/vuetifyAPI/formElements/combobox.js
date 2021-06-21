@@ -1,8 +1,12 @@
+import { v4 } from "uuid";
+
 export default {
   displayName: "Auto",
   vuetifyComponent: "component",
-  desc: "desc",
+  type: "input",
+  id: v4(),
   level: "advanced",
+  desc: "desc",
   props: {
     "allow-overflow": {
       propName: "allow-overflow",

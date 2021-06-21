@@ -4,8 +4,12 @@
       v-for="(element, idx) in vElements"
       :key="idx"
       class="element-picker-container"
+      draggable="true"
     >
-      <div class="element-picker-overlay" @click="addElement(element)" />
+      <div
+        class="element-picker-overlay"
+        @click="addElement(element, 'input')"
+      />
       <div :is="element.vuetifyComponent" :label="element.displayName" />
     </div>
     <v-divider class="pa-0 ma-0"></v-divider>
@@ -13,22 +17,14 @@
 </template>
 
 <script>
-import { v4 } from "uuid";
 import vElements from "../../data/vuetifyAPI/formElements";
+import { FormBuilderMixins } from "../../mixins/FormBuilderMixins";
 
 export default {
+  mixins: [FormBuilderMixins],
   data: () => ({
     vElements,
   }),
-  methods: {
-    addElement(element) {
-      const elm = { ...element };
-      elm.id = v4();
-      elm.type = "input";
-
-      this.$emit("add-input-element", elm);
-    },
-  },
 };
 </script>
 

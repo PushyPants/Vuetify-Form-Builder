@@ -1,8 +1,12 @@
+import { v4 } from "uuid";
+
 // this is the v-form
 // putting this here in case we need to have form settings
 export default {
   displayName: "Form",
   vuetifyComponent: "v-form",
+  type: "input",
+  id: v4(),
   desc:
     "The internal form component makes it easy to add validation to form inputs. All input components have a rules prop which accepts a mixed array of types function, boolean and string. These allow you to specify conditions in which the input is valid or invalid. Whenever the value of an input is changed, each function in the array will receive the new value and each array element will be evaluated. If a function or array element returns false or a string, validation has failed and the string value will be presented as an error message.",
   level: "advanced",

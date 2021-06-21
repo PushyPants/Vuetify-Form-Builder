@@ -1,8 +1,12 @@
+import { v4 } from "uuid";
+
 export default {
   displayName: "File Upload",
   vuetifyComponent: "v-file-input",
-  desc: "desc",
-  level: "The File Upload component allows the use to upload file(s).",
+  type: "input",
+  id: v4(),
+  desc: "The File Upload component allows the use to upload file(s).",
+  level: "basic",
   props: {
     "append-icon": {
       propName: "append-icon",

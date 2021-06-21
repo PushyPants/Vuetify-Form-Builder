@@ -1,7 +1,11 @@
+import { v4 } from "uuid";
+
 export default {
   displayName: "Column",
   vuetifyComponent: "v-col",
   icon: "mdi-view-array",
+  type: "column",
+  id: v4(),
   desc: "Divides a row element into columns",
   level: "basic",
   props: {

@@ -1,8 +1,12 @@
+import { v4 } from "uuid";
+
 export default {
   displayName: "Input",
   vuetifyComponent: "v-input",
-  desc: "desc",
-  level: "level",
+  type: "input",
+  id: v4(),
+  desc: "This is an input designed to be custom",
+  level: "advanced",
   props: {
     "append-icon": {
       propName: "append-icon",

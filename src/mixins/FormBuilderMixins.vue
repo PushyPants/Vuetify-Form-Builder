@@ -1,7 +1,13 @@
 <script>
+import { v4 } from "uuid";
 import { mapGetters, mapActions } from "vuex";
+import layoutElements from "../data/vuetifyAPI/layoutElements";
+const lodash_get = require("lodash/get");
 
 export const FormBuilderMixins = {
+  data: () => ({
+    layoutElements,
+  }),
   computed: {
     ...mapGetters([
       "formElements",
@@ -14,11 +20,21 @@ export const FormBuilderMixins = {
       "elementToEdit",
       "elementToRemove",
     ]),
+    activeLayoutElement() {
+      return (
+        this.hoverActiveCol ||
+        this.hoverActiveRow ||
+        this.activeColElement ||
+        this.activeRowElement
+      );
+    },
   },
   methods: {
     ...mapActions([
+      "updateFormElements",
       "addRowElement",
       "addInputElement",
+      "addColumnElement",
       "removeElement",
       "setHoverActiveInput",
       "setActiveInputElement",
@@ -29,6 +45,76 @@ export const FormBuilderMixins = {
       "setElementToEdit",
       "setElementToRemove",
     ]),
+    addElement(element, type) {
+      const elm = { ...element };
+
+      switch (type) {
+        case "row":
+          this.addRow(elm);
+          break;
+        case "column":
+          this.addColumnElement(elm);
+          break;
+        default:
+          this.addInputElement(elm);
+      }
+    },
+    addRow(element) {
+      // every time we add a row we are going to automatically
+      // add a column forformatting and logistical reasons
+      const elementsArr = [...this.formElements];
+      const col = { ...this.layoutElements.col };
+      col.id = v4();
+      col.type = "column";
+      col.children = [];
+      element.children = [col];
+
+      if (this.activeLayoutElement) {
+        const parentPath = this.getParentPath(
+          elementsArr,
+          this.activeLayoutElement
+        );
+        element.parentPath = parentPath;
+        const parentElement = lodash_get(elementsArr, parentPath, elementsArr);
+        parentElement.push(element);
+      } else {
+        elementsArr.push(element);
+        this.setActiveRowElement(element.id);
+        this.setActiveColElement(col.id);
+      }
+
+      this.updateFormElements(elementsArr);
+    },
+    findPathFromId(obj, id) {
+      for (const key in obj) {
+        if (obj[key] && typeof obj[key] === "object") {
+          let result = this.findPathFromId(obj[key], id);
+          if (result) {
+            result.unshift(key);
+            return result;
+          }
+        } else if (obj[key] === id) {
+          return [key];
+        }
+      }
+    },
+    joinPath(arr) {
+      return arr
+        .map((val) => {
+          return isNaN(parseInt(val)) ? `.${val}` : `[${parseInt(val)}]`;
+        })
+        .join("");
+    },
+    getParentPath(obj, id) {
+      const pathArr = this.findPathFromId(obj, id);
+      const joinedPath = this.joinPath(pathArr);
+      const len = joinedPath.length;
+      const lastIdx = joinedPath.lastIndexOf("[");
+      const toEnd = lastIdx - len;
+      const parentPath = joinedPath.slice(0, toEnd);
+
+      return parentPath;
+    },
     sanitizedDefaults(propsObj = {}) {
       let filteredObj = {};
 

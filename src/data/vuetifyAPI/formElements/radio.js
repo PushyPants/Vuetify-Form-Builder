@@ -1,6 +1,11 @@
+import { v4 } from "uuid";
+// This will go inside a radio group and the collective settings will probably be merged
+
 export default {
   displayName: "Radio Button",
   vuetifyComponent: "v-radio",
+  type: "input",
+  id: v4(),
   desc:
     "The v-radio component is a simple radio button. When combined with the v-radio-group component you can provide groupable functionality to allow users to select from a predefined set of options.",
   level: "basic",

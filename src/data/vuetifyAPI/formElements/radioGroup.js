@@ -1,6 +1,10 @@
+import { v4 } from "uuid";
+
 export default {
   displayName: "Radio Group",
   vuetifyComponent: "v-radio-group",
+  type: "input",
+  id: v4(),
   desc: "Used as a wrapper for radio buttons",
   level: "basic",
   props: {

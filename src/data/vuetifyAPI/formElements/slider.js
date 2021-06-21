@@ -1,6 +1,10 @@
+import { v4 } from "uuid";
+
 export default {
   displayName: "Slider",
   vuetifyComponent: "v-slider",
+  type: "input",
+  id: v4(),
   desc:
     "The Slider component is a better visualization of the number input. It is used for gathering numerical user data.",
   level: "basic",

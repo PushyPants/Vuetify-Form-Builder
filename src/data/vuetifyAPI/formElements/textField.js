@@ -1,6 +1,10 @@
+import { v4 } from "uuid";
+
 export default {
   displayName: "Short Text",
   vuetifyComponent: "v-text-field",
+  type: "input",
+  id: v4(),
   desc:
     "Short Text is a single-line text-field, useful for small amounts of text.",
   level: "basic",

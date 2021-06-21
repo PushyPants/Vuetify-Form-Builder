@@ -1,6 +1,10 @@
+import { v4 } from "uuid";
+
 export default {
   displayName: "Switch",
   vuetifyComponent: "v-switch",
+  type: "input",
+  id: v4(),
   desc:
     "The Switch component provides users the ability to choose between two distinct values. These are very similar to a toggle, or on/off switch, though aesthetically different than a checkbox.",
   level: "basic",

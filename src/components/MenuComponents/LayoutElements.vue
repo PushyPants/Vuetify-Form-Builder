@@ -5,7 +5,8 @@
       :key="idx"
       class="mb-2"
       x-large
-      @click="addElement(element)"
+      draggable="true"
+      @click="addElement(element, 'row')"
     >
       <v-icon class="mr-2">{{ element.icon }}</v-icon> {{ element.displayName }}
     </v-btn>
@@ -13,23 +14,14 @@
 </template>
 
 <script>
-import { v4 } from "uuid";
 import layoutElements from "../../data/vuetifyAPI/layoutElements";
+import { FormBuilderMixins } from "../../mixins/FormBuilderMixins";
 
 export default {
+  mixins: [FormBuilderMixins],
   data: () => ({
     layoutElements,
   }),
-  methods: {
-    addElement(element) {
-      const elm = { ...element };
-      elm.id = v4();
-      elm.elements = [];
-      elm.type = "layout";
-
-      this.$emit("add-layout-obj", elm);
-    },
-  },
 };
 </script>
 

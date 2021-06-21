@@ -1,18 +1,21 @@
 <template>
   <v-row no-gutters class="form-builder-elements-container">
-    <v-form>
-      <div
-        class="form-builder-element-wrapper"
-        v-for="(element, idx) in formElements"
-        :key="idx"
-      >
-        <form-builder-row-element
-          v-if="element.type === 'layout'"
-          :element="element"
-        />
-        <form-builder-input-element v-else :element="element" />
-      </div>
-    </v-form>
+    <v-col>
+      <v-form>
+        <div
+          class="form-builder-element-wrapper"
+          v-for="(element, idx) in formElements"
+          :key="idx"
+        >
+          <form-builder-row-element
+            v-if="element.type === 'row'"
+            :element="element"
+          >
+          </form-builder-row-element>
+          <form-builder-input-element v-else :element="element" />
+        </div>
+      </v-form>
+    </v-col>
   </v-row>
 </template>
 

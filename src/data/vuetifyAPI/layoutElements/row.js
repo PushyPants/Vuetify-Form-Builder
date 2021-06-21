@@ -1,6 +1,10 @@
+import { v4 } from "uuid";
+
 export default {
   displayName: "Row",
   vuetifyComponent: "v-row",
+  type: "row",
+  id: v4(),
   icon: "mdi-view-day",
   desc: "Horizontal container to hold columns",
   level: "basic",

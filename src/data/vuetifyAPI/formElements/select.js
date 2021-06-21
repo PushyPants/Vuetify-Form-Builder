@@ -1,6 +1,10 @@
+import { v4 } from "uuid";
+
 export default {
   displayName: "Select Dropdown",
   vuetifyComponent: "v-select",
+  type: "input",
+  id: v4(),
   desc:
     "Select fields components are used for collecting user provided information from a list of options.",
   level: "basic",

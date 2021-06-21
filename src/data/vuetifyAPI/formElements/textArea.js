@@ -1,6 +1,10 @@
+import { v4 } from "uuid";
+
 export default {
   displayName: "Long Text",
   vuetifyComponent: "v-textarea",
+  type: "input",
+  id: v4(),
   desc:
     "Long Text in its simplest form is a multi-line text-field, useful for larger amounts of text.",
   level: "basic",

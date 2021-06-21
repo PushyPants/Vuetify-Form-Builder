@@ -1,6 +1,5 @@
 import vAutocomplete from "./autocomplete";
 import vCheckbox from "./checkbox";
-import vCombobox from "./combobox";
 import vFileInput from "./fileInput";
 import vForm from "./form";
 import vRadio from "./radio";
@@ -15,7 +14,6 @@ import vTextField from "./textField";
 export default {
   vAutocomplete,
   vCheckbox,
-  // vCombobox,
   vFileInput,
   // vForm,
   vRadio,

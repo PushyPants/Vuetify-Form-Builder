@@ -1,9 +1,13 @@
+import { v4 } from "uuid";
+
 export default {
   displayName: "Checkbox",
   vuetifyComponent: "v-checkbox",
+  type: "input",
+  id: v4(),
+  level: "basic",
   desc:
     "The checkbox component provides users the ability to choose between two distinct values.",
-  leve: "basic",
   props: {
     "append-icon": {
       propName: "append-icon",

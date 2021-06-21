@@ -1,6 +1,10 @@
+import { v4 } from "uuid";
+
 export default {
   displayName: "Range Slider",
   vuetifyComponent: "v-range-slider",
+  type: "input",
+  id: v4(),
   desc:
     "The Range Slider is a better visualization of the number range. It is used for gathering numerical user data",
   level: "advanced",

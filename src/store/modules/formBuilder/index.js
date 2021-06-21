@@ -30,12 +30,19 @@ const getters = {
 };
 
 const actions = {
+  updateFormElements({ commit }, elementsArr) {
+    commit("updateFormElementsHandler", elementsArr);
+  },
   addRowElement({ commit }, elmObj) {
     commit("addRowElementHandler", elmObj);
   },
-  addInputElement({ commit }, elmObj) {
-    commit("addInputElementHandler", elmObj);
+
+  addInputElement({ commit }, vElmObj) {
+    commit("addInputElementHandler", vElmObj);
   },
+
+  addColumnElement({ commit }, elmObj) {},
+
   async removeElement({ commit, state }, elementId) {
     console.log(`trying to delete: `, elementId);
     let formElements = [...state.formElements];
@@ -70,14 +77,14 @@ const actions = {
 };
 
 const mutations = {
+  updateFormElementsHandler(state, elementsArr) {
+    state.formElements = elementsArr;
+  },
   addRowElementHandler(state, elmObj) {
     state.formElements.push(elmObj);
   },
   addInputElementHandler(state, elmObj) {
     state.formElements.push(elmObj);
-  },
-  updateFormElementsHandler(state, formElmObj) {
-    state.formElements = formElmObj;
   },
   setHoverActiveInputHandler(state, id) {
     state.hoverActiveInput = id;
